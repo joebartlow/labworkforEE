@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void add_frac(int n1, int d1, int n2, int d2, int *n_ans, int *d_ans);
 
