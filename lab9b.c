@@ -7,29 +7,104 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
-void instructions;
+void do_next_op(double* initial, char* operator, double* operand);
+void scan_data(double* initial, char* operator, double* operand);
+void instructions();
 
 int main (void){
 
-int inital = 0;
+
+	double *initial;
+	char *operator;
+	double *operand;
+
+	initial = (double*) malloc(sizeof(double));
+	operator = (char*) malloc(sizeof(char));	
+	operand = (double*) malloc(sizeof(double));
+
+	*initial = 0;
+	instructions();
+
+	printf("Result:      %lf      ", *initial);
+	do {
+		scan_data(initial, operator, operand);
+		if (*operator != 'c'){
+			do_next_op(initial, operator, operand);
+		}
+		printf("Result:      %lf      ", *initial);
+	} while (*operator != 'q');
+
+	printf("Final:       %lf\n", *initial);
 
 
-void instructions();
+	return 0;
+}
+
+void do_next_op(double* initial, char* operator, double* operand){
+
+	printf("This is operator: %c\n", *operator);
+	switch(*operator){
+
+		case '+':
+			*initial = *initial + *operand;
+			break;
+
+		case '-':
+			*initial = *initial - *operand;
+			break;
+
+		case '*':
+			*initial = *initial * *operand;
+			break;
+
+		case '/': 
+			*initial = *initial / *operand;
+			break;
+
+		case '^':
+			*initial = pow(*initial,*operand);
+			break;
+		case 'c':
+			*initial = 0;
+			break;
+
+		case 'q':
+			*operator = 'q';
+			break;
+		default:
+			printf("Not a supported operator.\n");
+			break;
 
 
+	}
 
 
-return 0;
+}
+
+void scan_data(double* initial, char* operator, double* operand){
+
+	printf("Input> ");
+	printf("This is operator: %c\n", *operator);
+free(operator);
+	operator = (char*) malloc(sizeof(char));
+	printf("This is operator: %c\n", *operator);
+
+	scanf("%c", operator);
+	if(*operator != 'q'){
+		if(*operator == 'c'){
+			*initial = 0;
+		}
+		else scanf("%lf", operand);
+	}
 }
 
 void instructions(){
-printf("This simple calculator program has 5 operations:\n");
-printf("+, -, *, /, and ^\n");
-printf("Type an operator, space, then a number, e.g., + 5.0\n");
-printf("Type c to clear the result.\n");
-printf("Type q to quit the program.\n");
- 
-return ;
+	printf("This simple calculator program has 5 operations:\n");
+	printf("+, -, *, /, and ^\n");
+	printf("Type an operator, space, then a number, e.g., + 5.0\n");
+	printf("Type c to clear the result.\n");
+	printf("Type q to quit the program.\n");
 }
