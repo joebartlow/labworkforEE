@@ -36,16 +36,17 @@ int main (void){
 		}
 		printf("Result:      %lf      ", *initial);
 	} while (*operator != 'q');
+	//} while ( 1 == 1);
 
-	printf("Final:       %lf\n", *initial);
+printf("Final:       %lf\n", *initial);
 
 
-	return 0;
+return 0;
 }
 
 void do_next_op(double* initial, char* operator, double* operand){
 
-	printf("This is operator: %c\n", *operator);
+	//	printf("This is operator: %c\n", *operator);
 	switch(*operator){
 
 		case '+':
@@ -86,19 +87,22 @@ void do_next_op(double* initial, char* operator, double* operand){
 
 void scan_data(double* initial, char* operator, double* operand){
 
-	printf("Input> ");
-	printf("This is operator: %c\n", *operator);
-free(operator);
-	operator = (char*) malloc(sizeof(char));
-	printf("This is operator: %c\n", *operator);
-
-	scanf("%c", operator);
+	printf("Input operator> ");
+	scanf("%s", operator);
 	if(*operator != 'q'){
 		if(*operator == 'c'){
 			*initial = 0;
 		}
-		else scanf("%lf", operand);
+		else {
+		//	printf("Input operator> ");
+			scanf("%lf", operand);
+		}
 	}
+}
+
+void scan_operand(double* operand){
+
+	scanf("%lf", operand);
 }
 
 void instructions(){
